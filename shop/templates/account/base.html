@@ -1,27 +1,73 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>{% block title %} {% endblock %}</title>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DJANGO SHOP</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+ 
+<!-- 스크립트를 사용하기 위한 블록 선언 ###-->
+  {% block script %}
+  {% endblock %}
+
 </head>
+
 <body>
+<nav class="navbar navbar-expand-md bg-light navbar-light border-bottom">
+  <a class="navbar-brand" href="https://localhost:8000/">HOME</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-{% block header %} {% include 'shop/header.html' %} {% endblock header %}
-<div id="wrap">
-    <div class="left-wrap">
-        {% block left_side %} {% include 'shop/left_side.html' %} {% endblock left_side %}
-    </div>
 
-    <div class="right-wrap">
-        {% block content %}
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      {% if user.is_authenticated %}
+      <li>Hello, {{user.username}}</li>
+      <li class="nav-item">
+      <a class="nav-link" href="https://localhost:8000/accounts/logout/">로그아웃</a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="{% url "shop:cart" user.pk %}">장바구니로 이동</a>
+       </li>  
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="{% url "shop:profile" user.pk %}">PROFILE</a>
+       </li>  
+       
 
-        {% endblock content %}
-    </div>
-</div>
-{% block footer %} {% include 'shop/footer.html' %} {% endblock footer %}
+      {% else %}
+   
+      <li class="nav-item">
+        <a class="nav-link" href="https://localhost:8000/accounts/signup/">회원가입</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="https://localhost:8000/accounts/login/">로그인</a>
+      </li>
+
+      
+
+      {% endif %}  
+       
+    </ul>
+ </div>
+</nav>
+<br>
+
+ 
+{% block contents %}
+{% endblock %}
 
 {% block extra_body %}
 {% endblock %}
 
+
+
+
 </body>
 </html>
+

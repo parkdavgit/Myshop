@@ -13,7 +13,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product_category')
-    image = ImageField(upload_to='photos')
+    image = ImageField(upload_to='')
     price = models.IntegerField()
     quantity = models.IntegerField(default=0)
     description = models.TextField()
@@ -64,13 +64,14 @@ class Order(models.Model):
     quantity = models.IntegerField(default=1)
     products = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_product')
     order_date = models.DateTimeField(auto_now_add=True)
+    number = models.IntegerField(default=1)#from David
 
     #모델 인스턴스를 아이디 값 내림차순 정렬
     class Meta:
         ordering = ('-id',)
 
     def __str__(self):
-        return '{} by {}'.format(self.products.name, self.user)
+       return '{} by {}'.format(self.products.name, self.user)
 
 
 

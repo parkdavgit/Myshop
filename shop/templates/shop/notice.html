@@ -5,8 +5,8 @@
     NOTICE
 {% endblock title %}
 
-{% block content %}
-    {% load staticfiles %}
+{% block contents %}
+    {% load static %}
     <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
     <div class="content">
         <div id="board_list">
@@ -19,8 +19,8 @@
             </div>
 
             <div class="board_table">
-                <table>
-                    <thead>
+                <table class="table">
+                    <thead class="thead-dark">
                     <tr>
                         <th>no</th>
                         <th>제목</th>
@@ -40,22 +40,9 @@
             </div>
         </div>
         <!-- pagenation nav -->
-        <div class="board_paging">
-            <ol>
-            {% if posts.has_previous %}
-                <li class="paging_pre">
-                    <a href="{% url 'shop:notice' %}?page={{ posts.previous_page_number }}"><</a>
-                </li>
-            {% endif %}
 
-                <li><a href="#">{{ posts.number }}</a></li>
+        {% include 'includes/paginator1.html' %}
 
-            {% if posts.has_next %}
-                <li class="paging_next">
-                    <a href="{% url 'shop:notice' %}?page={{ posts.next_page_number }}">></a>
-                </li>
-            {% endif %}
-            </ol>
         </div>
     </div>
-{% endblock content %}
+{% endblock %}

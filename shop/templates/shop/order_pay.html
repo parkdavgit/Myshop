@@ -5,8 +5,8 @@
     PAYMENT
 {% endblock title %}
 
-{% block content %}
-    {% load staticfiles %}
+{% block contents %}
+    {% load static %}
     {% load thumbnail %}
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-x.y.z.js"></script>
@@ -68,7 +68,7 @@
             </form>
         </div>
     </div>
-{% endblock content %}
+{% endblock %}
 
 {% block extra_body %}
     <script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -79,7 +79,7 @@
                 name: $form.find('[name=name]').val(),
                 amount: $form.find('[name=amount]').val(),
             };
-            IMP.init('{{ iamport_shop_id }}');
+            IMP.init('{{ imp07917642 }}');
             IMP.request_pay(params, function(response_data) {
                 console.log('response_data :', response_data);
                 if ( ! response_data.success ) {
@@ -96,4 +96,4 @@
         });
     </script>
 
-{% endblock %}
+{% endblock extra_body %}

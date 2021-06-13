@@ -5,8 +5,8 @@
     {{ post.title }}
 {% endblock title %}
 
-{% block content %}
-    {% load staticfiles %}
+{% block contents %}
+    {% load static %}
     <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
     <div class="content">
         <div id="board_list">
@@ -19,7 +19,8 @@
             </div>
         </div>
     <div class="board_view">
-        <table>
+        <table class="table">
+            <thead class="thead-dark">
             <tbody>
             <tr>
                 <td>{{ post.title }}</td>
@@ -32,6 +33,7 @@
                 </td>
             </tr>
             </tbody>
+            </thead>
         </table>
     </div>
     <div class="board_bottom">
@@ -40,4 +42,7 @@
         </span>
     </div>
     </div>
-{% endblock content %}
+
+  
+
+{% endblock %}

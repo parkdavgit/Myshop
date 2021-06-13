@@ -1,13 +1,162 @@
 
 {% extends "shop/../account/base.html" %}
+{% block contents %}
 
-{% block title %}
-    Index
-{% endblock title %}
+{% load thumbnail %}
 
-{% block content %}
+<div class="container my-3">
+    <table class="table">
+    <thead class="thead-dark">
+    <tr>
+    <th>CATEGORY</th>
+    </tr>
+    </thead>
 
-            {% block right_side %} {% include 'shop/right_side.html' %} {% endblock right_side %}
+    <tbody>
+                        
+    <tr><td>{% for category in categories %}
+            <a href="{% url 'shop:show_category' category.pk %}">{{ category.sort }}</a><br>
+            {% endfor %}  
+        </td>
+          
+    </tr></tbody>
+    </table>
+</div>
 
-{% endblock content %}
+ 
 
+<div class="container my-3">
+    <table class="table">
+    <thead class="thead-dark">
+    <tr>
+    <th>WEEKLY BEST PRODUCTS</th>
+    </tr>
+    </thead>
+
+    <tbody>
+                        
+    <tr> {% for product in lank_products %}
+        {% thumbnail product.image "200x200" crop="center" as im %}
+        <td><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"></td>
+        {% endthumbnail %}
+        {% endfor %}
+        
+          
+    </tr></tbody>
+    </table>
+</div>
+
+
+
+
+<div class="container my-3">
+    <table class="table">
+    <thead class="thead-dark">
+    <tr>
+    <th>ALL PRODUCTS</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr> <td> 
+     <table><tr><td>
+    <div class="row tm-mb-90 tm-gallery">
+
+        {% for product in products %}
+       
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+            <figure class="effect-ming tm-video-item">
+                {% thumbnail product.image "200x200" crop="center" as im %}
+                <a href="{% url 'shop:product_detail' product.pk %}"> 
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}" class="img-fluid"></a>
+                <figcaption class="d-flex align-items-center justify-content-center">
+                    <div class="d-flex justify-content-between tm-text-gray"><a href="{% url 'shop:product_detail' product.pk %}">{{product.name}}</a></div>
+                </figure>        
+                {% endthumbnail %}   
+                </figcaption>                    
+            
+           
+      
+    </div>
+    {% endfor %}
+    </td>
+    </tr>
+    </table>   
+
+    </td>
+    </tr>
+    </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container my-3">
+    <table class="table">
+    <thead class="thead-dark">
+    <tr>
+    <th>공지사항</th>
+    </tr>
+    </thead>
+
+    <tbody>
+                        
+    <tr><td>  <a class="nav-link" href="{% url "shop:notice" %}">공지사항</a>
+
+        </td>
+          
+    </tr></tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+{% endblock contents %}  

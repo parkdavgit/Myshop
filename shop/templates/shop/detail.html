@@ -5,22 +5,26 @@
     DETAIL
 {% endblock title %}
 
-{% block content %}
-    {% load staticfiles %}
+{% block contents %}
+    {% load static %}
     <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
-    <div class="content">
-        <div class="detailArea">
+    <div class="container my-3">
+         
+        <form action="{% url "shop:cart_or_buy" product.pk %}", method="POST">
+            {% csrf_token %}
+         
             <div class="product_img_area">
                 <div class="key_img">
                     <img src = '{{ product.image.url }}' width='300' />
                 </div>
             </div>
+
             <div class="infoArea">
                 <h3>{{ product.name }}</h3>
                 <div class="detailinfo">
                     <p>{{ product.description }}</p>
                 </div>
-            <form action="{% url "shop:cart_or_buy" product.pk %}", method="POST">
+             
                 <div class="detail_payment">
                     <table>
                         <tbody>
@@ -55,70 +59,71 @@
                         </tbody>
                     </table>
 
-                        {% if product.quantity > 0 %}
-                            <table>
-                                <tbody class="product_option">
-                                <tr class="product_quantity">
+                    <table> <tbody>
+                        <tr>
                                     <th>
                                         수량
                                     </th>
                                     <td>
-                                        <select name="quantity">
-                                            {% for quantity in quantity_list %}
-                                                <option value={{ quantity }}>{{ quantity }}</option>
-                                            {% endfor %}
-                                        </select>
+
+                                        <input type="number" name="quantity" id="quantity"
+                                        value="{{ form.quantity.value|default_if_none:'' }}">   
+                                                                              
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                        {% else %}
-                            <table>
-                                <tbody class="product_option">
-                                <tr class="product_quantity">
-                                    <th>
-                                        SOLD OUT
-                                    </th>
-                                </tr>
-                                </tbody>
-                            </table>
-                        {% endif %}
+                                        
                 </div>
-
-                <div class="payment">
-                    <div class="btnArea">
-                        <ul>
-                            {% if product.quantity > 0 %}
-                                <li class="cart">
-                                    <button type="submit" name="add_cart" value="add_cart">+ ADD SHOPPING CART</button>
-                                    {% csrf_token %}
-                                </li>
-                                <li class="buy">
-                                    <button type="submit" name="buy" value="buy_it_now">BUY IT NOW</button>
-                                    {% csrf_token %}
-                                </li>
-                                {% if messages %}
-                                    <ul class="messages">
-                                        {% for message in messages %}
-                                            <li class="{{ message.tags }}">
-                                                {{ message }}<br>
-                                                <a href="{% url "shop:cart" user.pk %}">장바구니로 이동</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            {% else %}
-                                <li class="soldout">
-                                    SOLD OUT (X)
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
-                </form>
-            </div>
+                
+                </div> 
+                            
+             
+        
         </div>
 
+        
 
+                               
+                <div class="container my-3">
+                    <table class="table">
+                    
+                
+                    <tbody>
+                                        
+                    <tr><td> <button type="submit" name="add_cart" value="add_cart">+ ADD SHOPPING CART</button>
+                    {% csrf_token %}
+                        </td>               
+                    </tr>
+                    <tr><td><button type="submit" name="buy" value="buy_it_now">BUY IT NOW</button>
+                        {% csrf_token %}
+                            </td>               
+                    </tr>
+                    <tr><td> <a href="{% url "shop:cart" user.pk %}">장바구니로 이동</a>
+                                </td>               
+                    </tr>    
+                        
+                
+                
+                
+                </tbody>
+                    </table>
+                </div>
+                
+
+
+
+
+
+
+
+
+
+
+                </div>
+               
+        </form>
     </div>
-{% endblock content %}
+
+
+{% endblock %} 

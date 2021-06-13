@@ -5,8 +5,8 @@
     Profile
 {% endblock title %}
 
-{% block content %}
-    {% load staticfiles %}
+{% block contents %}
+    {% load static %}
     <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
 
     <div class="content">
@@ -41,7 +41,7 @@
             <ul>
                 <li>
                     <h3>
-                        <a href="{% url 'shop:order_list' user.pk %}">
+                        <a href="{% url 'shop:Norder_list' user.pk %}">
                             <strong>ORDER LIST</strong>
                         </a>
                     </h3>
@@ -91,5 +91,5 @@
     </div>
 
 
-{% endblock content %}
+{% endblock %}
 

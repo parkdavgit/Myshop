@@ -1,0 +1,81 @@
+
+{% extends "shop/../account/base.html" %}
+
+{% block title %}
+   ORDER LIST
+{% endblock title %}
+
+ 
+{% block contents %}
+    {% load static %}
+    {% load thumbnail %}
+    <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
+    <div class="content">
+        <div id="board_list">
+            
+                    <h2>
+                        <span>ORDER LIST</span>
+                    </h2>
+                
+        </div>
+        <div class="container my-3">
+             
+                <h3>
+                    <span>주문 상품 정보</span>
+                </h3>
+             
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="date">
+                        ORDER-DATE
+                    </th>
+                    <th class="thumb">
+                        IMAGE
+                    </th>
+                    <th class="product">
+                        PRODUCT
+                    </th>
+                    <th class="quantity">
+                        QUANTITY
+                    </th>
+                    <th class="price">
+                        PRICE
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                {% for i in orders %}
+                    <tr>
+                        <td class="date">
+                            {{ i.order_date }}
+                        </td>
+                        <td class="thumb">
+                            {% thumbnail i.products.image "100x100" crop="center" as im %}
+                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ im.name }}">
+                            {% endthumbnail %}
+                        </td>
+                        <td class="product">
+                            {{ i.products.name }}
+                        </td>
+                        <td class="quantity">
+                            {{ i.quantity }}
+                        </td> -->
+                        
+                        <td>
+                            {{ i.amount }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <!-- pagenation nav -->
+        {% include 'includes/paginator.html' %}
+       
+{% endblock %}
+
+  
+ 
